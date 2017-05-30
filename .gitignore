@@ -1,0 +1,20 @@
+# General ignores
+*.swp
+
+# Ignores for backend
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+*.iml
+/quiz/.idea/
+/quiz/target/
+/lib/
+/classes/
+/target/
+/checkouts/
+.lein-deps-sum
+.lein-repl-history
+.lein-plugins/
+.lein-failures
+.nrepl-port
