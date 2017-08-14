@@ -3,12 +3,26 @@
             [ring.util.http-response :refer :all]
             [schema.core :as s]))
 
-(s/defschema Pizza
+(s/defschema Start
   {:name s/Str
-   (s/optional-key :description) s/Str
-   :size (s/enum :L :M :S)
-   :origin {:country (s/enum :FI :PO)
-            :city s/Str}})
+   :session-id s/Str})
+
+(s/defschema Answer
+  {:answer s/Str})
+
+(s/defschema Question
+  {:question s/Str
+   :answers [Answer]})
+
+(defn mock-start []
+  {:name "hello world quiz"
+   :session-id "foobar"})
+
+(defn mock-question []
+  {:question "What would Jesus do?"
+   :answers [{:answer "A"}
+             {:answer "B"}
+             {:answer "C"}]})
 
 (def app
   (api
@@ -16,20 +30,21 @@
      {:ui "/"
       :spec "/swagger.json"
       :data {:info {:title "Quiz"
-                    :description "Compojure Api example"}
-             :tags [{:name "api", :description "some apis"}]}}}
+                    :description "API for Quiz app"}
+             :tags [{:name "api", :description "default api"}]}}}
 
     (context "/api" []
       :tags ["api"]
 
-      (GET "/plus" []
-        :return {:result Long}
-        :query-params [x :- Long, y :- Long]
-        :summary "adds two numbers together"
-        (ok {:result (+ x y)}))
+      (GET "/start" []
+        :return Start
+        :query-params [game-id :- s/Str]
+        :summary "Start a game with given identifier and return a session identifier"
+        (ok (mock-start)))
 
-      (POST "/echo" []
-        :return Pizza
-        :body [pizza Pizza]
-        :summary "echoes a Pizza"
-        (ok pizza)))))
+      (GET "/question" []
+        :return Question
+        :query-params [session-id :- s/Str]
+        :summary "Get next question for the given session identifier"
+        (ok (mock-question))))))
+
