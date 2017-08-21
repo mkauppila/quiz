@@ -1,28 +1,8 @@
 (ns quiz.handler
   (:require [compojure.api.sweet :refer :all]
             [ring.util.http-response :refer :all]
-            [schema.core :as s]))
-
-(s/defschema Start
-  {:name s/Str
-   :session-id s/Str})
-
-(s/defschema Answer
-  {:answer s/Str})
-
-(s/defschema Question
-  {:question s/Str
-   :answers [Answer]})
-
-(defn mock-start []
-  {:name "hello world quiz"
-   :session-id "foobar"})
-
-(defn mock-question []
-  {:question "What would Jesus do?"
-   :answers [{:answer "A"}
-             {:answer "B"}
-             {:answer "C"}]})
+            [schema.core :as s]
+            [quiz.response-schemes :as response-type] [quiz.quiz :refer :all]))
 
 (def app
   (api
@@ -37,14 +17,14 @@
       :tags ["api"]
 
       (GET "/start" []
-        :return Start
+        :return response-type/Start
         :query-params [game-id :- s/Str]
         :summary "Start a game with given identifier and return a session identifier"
-        (ok (mock-start)))
+        (ok (start-new-game game-id)))
 
       (GET "/question" []
-        :return Question
+        :return response-type/Question
         :query-params [session-id :- s/Str]
         :summary "Get next question for the given session identifier"
-        (ok (mock-question))))))
+        (ok (new-question-for-game session-id))))))
 
