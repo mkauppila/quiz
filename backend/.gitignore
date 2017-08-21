@@ -1,6 +1,10 @@
 # General ignores
 *.swp
 
+# IntelliJ IDEA
+
+.idea
+
 # Ignores for backend
 pom.xml
 pom.xml.asc
