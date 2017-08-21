@@ -1,5 +1,5 @@
 (defproject quiz "0.1.0-SNAPSHOT"
-  :description "FIXME: write description"
+  :description "Backend for Quiz app"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [metosin/compojure-api "1.1.10"]]
   :ring {:handler quiz.handler/app}
