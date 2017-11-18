@@ -1,5 +1,4 @@
 import * as React from 'react';
-import './App.css';
 
 import Title from './components/quiz/title'
 import Question from './components/quiz/questions'
