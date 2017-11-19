@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 interface Props {
-  children: any // tslint:disable-line:no-any
+  children: string
 }
 
 export default ({ children }: Props) => (
