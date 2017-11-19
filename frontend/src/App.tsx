@@ -2,7 +2,7 @@ import * as React from 'react';
 import styled, { injectGlobal } from './styled'
 
 import Title from './components/quiz/title'
-import Question from './components/quiz/questions'
+import Question from './components/quiz/question'
 import Answers from './components/quiz/answers'
 
 const quiz = {
@@ -26,14 +26,17 @@ const quiz = {
 
 // tslint:disable-line:no-unused-expression
 injectGlobal`
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Lora', 'serif';
-  }
-
   @import url('https://fonts.googleapis.com/css?family=Vollkorn+SC:600,700');
   @import url('https://fonts.googleapis.com/css?family=Lora');
+
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: 'Lora', 'serif';
+  }
 `
 
 const FlexContainer = styled.div`

@@ -12,20 +12,19 @@ interface Props {
 const List = styled.ul`
   padding: 0
 `
-
 const ListItem = styled.li`
   list-style: none;
+  margin-bottom: 8px;
 `
 const RadioBox = styled.input.attrs({
   type: 'radio'
 })`
   margin-right: 8px;
 `
-
 const Submit = styled.input.attrs({
   type: 'submit',
 })`
-  margin-top: 12px;
+  margin-top: 8px;
 `
 
 const Answer = ({ answer }: Answer) => (
@@ -36,7 +35,7 @@ const Answer = ({ answer }: Answer) => (
 )
 
 export default ({ answers }: Props) => (
-  <form action="something here">
+  <form>
     <List>
       {answers.map((answer) => Answer(answer))}
       <Submit value="Vastaa" />
