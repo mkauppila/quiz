@@ -6,9 +6,9 @@ export interface Props {
 }
 
 const Title = styled.h1`
-  font-family: 'Vollkorn SC', 'serif';
-  font-weight: 600;
-  margin-bottom: 16px;
+  font-family: ${({ theme }) => theme.fontFamily.title}, 'serif';
+  font-weight: ${({ theme}) => theme.fontWeight.semibold}
+  margin-bottom: ${({ theme }) => theme.padding.medium}px
 `
 
 export default (props: Props) => (

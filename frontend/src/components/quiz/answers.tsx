@@ -10,21 +10,20 @@ interface Props {
 }
 
 const List = styled.ul`
-  padding: 0
 `
 const ListItem = styled.li`
   list-style: none;
-  margin-bottom: 8px;
+  margin-bottom: ${({ theme }) => theme.padding.tiny};
 `
 const RadioBox = styled.input.attrs({
   type: 'radio'
 })`
-  margin-right: 8px;
+  margin-right: ${({ theme }) => theme.padding.medium}px;
 `
 const Submit = styled.input.attrs({
   type: 'submit',
 })`
-  margin-top: 8px;
+  margin-top: ${({ theme }) => theme.padding.medium}px;
 `
 
 const Answer = ({ answer }: Answer) => (

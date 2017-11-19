@@ -1,9 +1,10 @@
 import * as React from 'react';
-import styled, { injectGlobal } from './styled'
+import styled, { injectGlobal, ThemeProvider } from './styled'
 
 import Title from './components/quiz/title'
 import Question from './components/quiz/question'
 import Answers from './components/quiz/answers'
+import theme from './theme'
 
 const quiz = {
   title: 'Supernatural Quiz',
@@ -47,20 +48,14 @@ const FlexContainer = styled.div`
 const Wrapper = styled.div`
 `
 
-// Add proper theming instead of just putting stuff in the componetns
-// Use the `ThemeProvider`
-
-// export default () => (
-export default class App extends React.Component {
-  render() {
-    return ( 
-      <FlexContainer>
-        <Wrapper>
-          <Title>{quiz.title}</Title>
-          <Question>{quiz.question}</Question>
-          <Answers answers={quiz.answers} />
-        </Wrapper>
-      </FlexContainer>
-    )
-  }
-}
+export default () => ( 
+  <ThemeProvider theme={theme}>
+    <FlexContainer>
+      <Wrapper>
+        <Title>{quiz.title}</Title>
+        <Question>{quiz.question}</Question>
+        <Answers answers={quiz.answers} />
+      </Wrapper>
+    </FlexContainer>
+  </ThemeProvider>
+)
