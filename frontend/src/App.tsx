@@ -1,29 +1,11 @@
 import * as React from 'react';
 import styled, { injectGlobal, ThemeProvider } from './styled'
 
+import theme from './theme'
+import quiz from './localMockData'
 import Title from './components/quiz/title'
 import Question from './components/quiz/question'
 import Answers from './components/quiz/answers'
-import theme from './theme'
-
-const quiz = {
-  title: 'Supernatural Quiz',
-  question: 'How many seasons of Supernatural has been produced?',
-  answers: [
-    {
-      answer: '8 seasons'
-    },
-    {
-      answer: '14 seasons'
-    },
-    {
-      answer: '12 seasons'
-    },
-    {
-      answer: '6 seasons'
-    },
-  ]
-}
 
 // tslint:disable-line:no-unused-expression
 injectGlobal`
