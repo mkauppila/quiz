@@ -27,8 +27,8 @@ const Submit = styled.input.attrs({
 `
 
 const Answer = ({ answer }: Answer) => (
-  <ListItem>
-    <RadioBox name="answer" value={answer} />
+  <ListItem key={answer}>
+    <RadioBox name="group" value={answer} />
     {answer}
   </ListItem>
 )
