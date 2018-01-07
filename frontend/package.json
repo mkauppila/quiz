@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "enzyme": "^3.2.0",
+    "enzyme-to-json": "^3.2.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts-ts": "2.7.0",
@@ -15,9 +17,13 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.1.4",
     "@types/jest": "^21.1.2",
     "@types/node": "^8.0.34",
     "@types/react": "^16.0.10",
-    "@types/react-dom": "^16.0.1"
+    "@types/react-dom": "^16.0.1",
+    "enzyme-adapter-react-16": "^1.1.0",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1"
   }
 }
