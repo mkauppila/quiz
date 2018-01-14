@@ -2,7 +2,7 @@ import * as React from 'react'
 import styled from '../../styled'
 
 interface Props {
-  children: string
+  children: any
 }
 
 const Question =  styled.div`

@@ -19,7 +19,7 @@ const answers = [
 
 describe('anwers component', () => {
   it('a', () => {
-    const component = shallow(<Answers answers={answers} />)
+    const component = shallow(<Answers answers={answers} action={() => {}} />)
     expect(component).toMatchSnapshot()
   })
 })

@@ -6,7 +6,8 @@ interface Answer {
 }
 
 interface Props {
-  answers: Answer[]
+  answers: Answer[],
+  action: () => void,
 }
 
 const List = styled.ul`
@@ -33,8 +34,15 @@ const Answer = ({ answer }: Answer) => (
   </ListItem>
 )
 
-export default ({ answers }: Props) => (
-  <form>
+export default ({ answers, action }: Props) => (
+  <form
+    onSubmit={event => {
+        event.preventDefault();
+        console.log(`action ${JSON.stringify(action)}`)
+        action();
+      }
+    }
+  >
     <List>
       {answers.map((answer) => Answer(answer))}
       <Submit value="Vastaa" />
