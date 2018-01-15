@@ -8,6 +8,7 @@ import theme from './theme'
 import Title from './components/quiz/title'
 import Question from './components/quiz/question'
 import Answers from './components/quiz/answers'
+import List from './components/quizList'
 
 // tslint:disable-next-line:no-unused-expression
 injectGlobal`
@@ -32,6 +33,7 @@ const FlexContainer = styled.div`
 const FlexWrapper = styled.div`
 `
 
+// This should be a AnswerQuestionView / QuizItem?
 const ContentHtml = (props: /*AppState & { action: () => {} }*/ any) => (
   <FlexContainer>
     <FlexWrapper>
@@ -42,6 +44,7 @@ const ContentHtml = (props: /*AppState & { action: () => {} }*/ any) => (
   </FlexContainer>
 )
 
+// move mappings to quiz/index.tsx
 const mapStateToProps = (state: AppState) => ({
   title: state.title,
   question: state.question,
@@ -50,7 +53,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const actions = {
     actionA: {
-      type: 'this-is-action'
+      type: 'change-title'
     }
 }
 
@@ -70,8 +73,8 @@ export default () => (
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Switch>
-          <Route exact path="/" component={content}/>
-          <Route path="/next" component={content} />
+          <Route exact path="/" component={List}/>
+          <Route path="/quiz" component={content} />
           <Route render={() => <p>Nothing to see here</p>}/>
         </Switch>
       </ThemeProvider>
