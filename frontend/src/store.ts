@@ -29,7 +29,14 @@ const initialState = {
 
 const dummyReducer = (state = initialState, action: AnyAction) => {
   console.log(`action ${JSON.stringify(action)}`)
-  return state
+  if (action.type === 'change-title')  {
+    return {
+      ...state,
+      title: 'heh',
+    }
+  } else {
+    return state
+  }
 }
 
 export default createStore(dummyReducer)

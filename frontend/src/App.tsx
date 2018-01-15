@@ -1,14 +1,11 @@
 import * as React from 'react';
-import styled, { injectGlobal, ThemeProvider } from './styled'
+import { injectGlobal, ThemeProvider } from './styled'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import { Provider as StoreProvider, Dispatch, connect } from 'react-redux'
-import store, { State as AppState } from './store'
-// import { bindActionCreators } from 'redux'
+import { Provider as StoreProvider } from 'react-redux'
+import store from './store'
 import theme from './theme'
-import Title from './components/quiz/title'
-import Question from './components/quiz/question'
-import Answers from './components/quiz/answers'
 import List from './components/quizList'
+import Quiz from './components/quiz'
 
 // tslint:disable-next-line:no-unused-expression
 injectGlobal`
@@ -25,56 +22,13 @@ injectGlobal`
   }
 `
 
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const FlexWrapper = styled.div`
-`
-
-// This should be a AnswerQuestionView / QuizItem?
-const ContentHtml = (props: /*AppState & { action: () => {} }*/ any) => (
-  <FlexContainer>
-    <FlexWrapper>
-      <Title>{props.title}</Title>
-      <Question>{props.question}</Question>
-      <Answers answers={props.answers} action={props.actions} />
-    </FlexWrapper>
-  </FlexContainer>
-)
-
-// move mappings to quiz/index.tsx
-const mapStateToProps = (state: AppState) => ({
-  title: state.title,
-  question: state.question,
-  answers: state.answers
-})
-
-const actions = {
-    actionA: {
-      type: 'change-title'
-    }
-}
-
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-  actions:
-    // bindActionCreators(actions as any, dispatch)
-    () => {
-      dispatch(actions.actionA as any)
-    }
-
-})
-
-const content = connect(mapStateToProps, mapDispatchToProps)(ContentHtml as any)
-
 export default () => (
   <StoreProvider store={store}>
     <BrowserRouter>
       <ThemeProvider theme={theme}>
         <Switch>
           <Route exact path="/" component={List}/>
-          <Route path="/quiz" component={content} />
+          <Route path="/quiz" component={Quiz} />
           <Route render={() => <p>Nothing to see here</p>}/>
         </Switch>
       </ThemeProvider>
