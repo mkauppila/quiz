@@ -9,6 +9,12 @@ export interface State {
 }
 
 const initialState = {
+  mainTitle: 'Main title',
+  quizzes: [
+    'Supernatural quiz',
+    'Donald Duck quiz',
+  ],
+  // refactor to separate store?
   title: 'Supernatural Quiz',
   question: 'How many seasons of Supernatural has been produced?',
   answers: [
