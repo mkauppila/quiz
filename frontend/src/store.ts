@@ -6,6 +6,8 @@ export interface State {
   answers: Array<{
     answer: string
   }>
+  quizzes: String[]
+  mainTitle: String
 }
 
 const initialState = {
@@ -34,7 +36,6 @@ const initialState = {
 }
 
 const dummyReducer = (state = initialState, action: AnyAction) => {
-  console.log(`action ${JSON.stringify(action)}`)
   if (action.type === 'change-title')  {
     return {
       ...state,

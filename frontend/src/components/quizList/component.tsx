@@ -1,18 +1,11 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { State } from './index'
 
-const component = (props: any) => (
+export default (props: State) => (
   <div>
     <p>{props.title}</p>
     <ul>
-      { props.list.map((item: any) => <li key={item}>{item}</li>)}
+      {props.list.map((item: string) => <li key={item}>{item}</li>)}
     </ul>
   </div>
 )
-
-const mapPropsToState = (state: any) => ({
-  list: state.quizzes,
-  title: state.mainTitle,
-})
-
-export default connect(mapPropsToState)(component)

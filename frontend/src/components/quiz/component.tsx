@@ -5,6 +5,7 @@ import styled from '../../styled'
 import Title from './title'
 import Question from './question'
 import Answers from './answers'
+import { State } from './index'
 
 const FlexContainer = styled.div`
   display: flex;
@@ -14,7 +15,7 @@ const FlexContainer = styled.div`
 const FlexWrapper = styled.div`
 `
 
-export default (props: /*AppState & { action: () => {} }*/ any) => (
+export default (props: State) => (
   <FlexContainer>
     <FlexWrapper>
       <Title>{props.title}</Title>

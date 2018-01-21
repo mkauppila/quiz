@@ -38,7 +38,6 @@ export default ({ answers, action }: Props) => (
   <form
     onSubmit={event => {
         event.preventDefault();
-        console.log(`action ${JSON.stringify(action)}`)
         action();
       }
     }
