@@ -21,7 +21,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch<DummyAction>) => ({
   actions: () => {
-    dispatch(dummyAction)
+    dummyAction()(dispatch)
   }
 })
 

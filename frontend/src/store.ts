@@ -1,4 +1,5 @@
-import { createStore, AnyAction } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
 export interface State {
   title: String
@@ -35,15 +36,18 @@ const initialState = {
   ]
 }
 
-const dummyReducer = (state = initialState, action: AnyAction) => {
-  if (action.type === 'change-title')  {
-    return {
-      ...state,
-      title: 'heh',
-    }
-  } else {
-    return state
+import { DummyActionSuccess, DUMMY_ACTION_SUCCESS } from './actions/dummyAction'
+
+const dummyReducer = (state = initialState, action: DummyActionSuccess) => {
+  switch (action.type) {
+    case DUMMY_ACTION_SUCCESS:
+      return {
+        ...state,
+        title: action.title,
+      }
+    default:
+      return state
   }
 }
 
-export default createStore(dummyReducer)
+export default createStore(dummyReducer, applyMiddleware(thunk))
