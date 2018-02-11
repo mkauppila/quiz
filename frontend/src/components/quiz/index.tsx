@@ -1,6 +1,7 @@
 
 import { connect, Dispatch } from 'react-redux'
 import { State as AppState } from '../../store'
+import { bindActionCreators } from 'redux'
 import Component from './component'
 import dummyAction, { DummyAction } from '../../actions/dummyAction'
 
@@ -20,9 +21,7 @@ const mapStateToProps = (state: AppState) => ({
 } as State)
 
 const mapDispatchToProps = (dispatch: Dispatch<DummyAction>) => ({
-  actions: () => {
-    dummyAction()(dispatch)
-  }
+  actions: bindActionCreators(dummyAction, dispatch)
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component)
