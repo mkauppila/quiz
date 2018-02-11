@@ -1,5 +1,7 @@
 import * as express from 'express'
-import { camelCase } from 'lodash'
+import * as queryParams from './middleware/queryParams'
+import * as errorHandling from './middleware/errorHandling'
+import { queryParamError } from './middleware/errorHandling';
 
 interface Quiz {
   name: string
@@ -36,14 +38,7 @@ const quizzes = [
 const app = express()
 
 // Convert query param keys to camel case
-app.use((req, res, next) => {
-  const updatedQuery: any = {}
-  Object.keys(req.query).map((key) => {
-    updatedQuery[camelCase(key)] = req.query[key]
-  })
-  req.query = updatedQuery
-  next()
-})
+app.use(queryParams.toCamelCase)
 
 // return all the quizzes
 app.get('/', (req, res) => {
@@ -56,11 +51,12 @@ app.get('/', (req, res) => {
 //  objects: Questions (inc. answers), Title (game info?)
 app.get('/start', (req, res) => {
   const {quizIdentifier, gameIdentifier} = req.query
-  if (!!quizIdentifier || !!gameIdentifier) {
-    throw new Error('Needs both quizIdentifier and gameIdentifierd query params')
-  }
   console.log(`query params ${JSON.stringify(req.query)}`)
   console.log(`${quizIdentifier} ${gameIdentifier}`)
+  if (!!quizIdentifier === false || !!gameIdentifier === false) {
+    throw queryParamError('Needs both quizIdentifier and gameIdentifierd query params')
+  }
+
   res.json({hello: 'world'})
 })
 // GET /question?token=884848&answer=[option]
@@ -68,20 +64,14 @@ app.get('/start', (req, res) => {
 //  objects: Questions (inc. answers)
 app.get('/question', (req, res) => {
   const {gameIdentifier, answer} = req.query
-  if (!!gameIdentifier || !!answer) {
-    throw new Error('Needs both gameIdentifierd and asnwer query params')
+  if (!!gameIdentifier === false || !!answer === false) {
+    throw queryParamError('Needs both gameIdentifierd and asnwer query params')
   }
   res.json({hello: 'world'})
 })
 
 // Error handling middleware is defined last after the routes and other middleware functions
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.log(`Error: ${err}`)
-  next(err)
-})
-app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.log('handle failure here')
-  res.status(404).json({error: err.message}).end()
-})
+app.use(errorHandling.logError)
+app.use(errorHandling.errorResponse)
 
 app.listen(3000, undefined)
