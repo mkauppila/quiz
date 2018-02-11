@@ -8,6 +8,7 @@ interface Quiz {
 interface GameInfo {
   title: string
   description: string
+  gameToken: string
 }
 
 interface Answer {
@@ -20,9 +21,23 @@ interface Question {
   answers: Answer[]
 }
 
+const quizzes = [
+  {
+    name: 'Supernatural quiz',
+    identifier: 'natural',
+  },
+  {
+    name: 'Donald Duck quiz',
+    identifier: 'donald',
+  },
+] as Quiz[]
 
-// GET /quizzes
-//   returns all the lists
+const app = express()
+
+// return all the quizzes
+app.get('/', (req, res) => {
+  res.json(quizzes)
+})
 
 // GET /start?quiz-identifier=3993&client-id=4994
 //  start game with identifier and return the first question (and game id)
@@ -32,10 +47,5 @@ interface Question {
 // GET /question?token=884848&answer=[option]
 //  answer the current question for the active game and return new question
 //  objects: Questions (inc. answers)
-
-const app = express()
-app.get('/', (req, res) => {
-  res.json({hello: 'world'})
-})
 
 app.listen(3000, undefined)
