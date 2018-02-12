@@ -6,16 +6,28 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
+  },
+  "jest": {
+    "moduleFileExtensions": ["ts", "tsx", "js"],
+    "testMatch": ["**/*.spec.(ts|tsx|js)"],
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    }
   },
   "author": "Markus Kauppila",
   "license": "MIT",
   "dependencies": {
-    "@types/express": "^4.11.1",
-    "@types/lodash": "^4.14.102",
     "express": "^4.16.2",
     "lodash": "^4.17.5",
     "ts-node": "^4.1.0",
     "typescript": "^2.7.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.11.1",
+    "@types/lodash": "^4.14.102",
+    "@types/jest": "^22.1.2",
+    "jest": "^22.2.2",
+    "ts-jest": "^22.0.4"
   }
 }
