@@ -1,11 +1,11 @@
-import { QueryParams, validateQueryParams } from './queryParams'
+import { QueryParam, validateQueryParams } from './queryParams'
 
 describe('validating query params', () => {
   it('should not return error valid query param', () => {
     expect(
       validateQueryParams(
         {gameIdentifier: 'foo'},
-        QueryParams.gameIdentifier
+        QueryParam.gameIdentifier
       )
     ).toMatchObject([])
   })
@@ -14,18 +14,21 @@ describe('validating query params', () => {
     expect(
       validateQueryParams(
         {gameIdentifier: 'foo', answer: 'bar'},
-        QueryParams.gameIdentifier,
-        QueryParams.answer
+        QueryParam.gameIdentifier,
+        QueryParam.answer
       )
     ).toMatchObject([])
+
+    expect.any(Function)
+
   })
 
   it('returns the names of invalid query parameter', () => {
     expect(
       validateQueryParams(
         {},
-        QueryParams.gameIdentifier,
-        QueryParams.answer
+        QueryParam.gameIdentifier,
+        QueryParam.answer
       )
     ).toMatchObject(['gameIdentifier', 'answer'])
   })

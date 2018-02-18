@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as queryParams from './middleware/queryParams'
 import * as errorHandling from './middleware/errorHandling'
 import { queryParamError } from './middleware/errorHandling';
+import { getQueryParamsOrThrowError, QueryParam } from './queryParams'
 
 interface Quiz {
   name: string
@@ -50,12 +51,11 @@ app.get('/', (req, res) => {
 //  returns also game token used for the subsequent requests
 //  objects: Questions (inc. answers), Title (game info?)
 app.get('/start', (req, res) => {
-  const {quizIdentifier, gameIdentifier} = req.query
-  console.log(`query params ${JSON.stringify(req.query)}`)
-  console.log(`${quizIdentifier} ${gameIdentifier}`)
-  if (!!quizIdentifier === false || !!gameIdentifier === false) {
-    throw queryParamError('Needs both quizIdentifier and gameIdentifierd query params')
-  }
+  const {quizIdentifier, gameIdentifier} = getQueryParamsOrThrowError(
+    req.query,
+    QueryParam.quizIdentifier, QueryParam.gameIdentifier
+  )
+  console.log(quizIdentifier)
 
   res.json({hello: 'world'})
 })
