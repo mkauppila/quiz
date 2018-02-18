@@ -4,37 +4,7 @@ import * as errorHandling from './middleware/errorHandling'
 import { queryParamError } from './middleware/errorHandling';
 import { getQueryParamsOrThrowError, QueryParam } from './queryParams'
 
-interface Quiz {
-  name: string
-  identifier: string
-}
-
-interface GameInfo {
-  title: string
-  description: string
-  gameToken: string
-}
-
-interface Answer {
-  answer: string
-  identifier: string // identify the answer when user is answering the question
-}
-
-interface Question {
-  question: string
-  answers: Answer[]
-}
-
-const quizzes = [
-  {
-    name: 'Supernatural quiz',
-    identifier: 'natural',
-  },
-  {
-    name: 'Donald Duck quiz',
-    identifier: 'donald',
-  },
-] as Quiz[]
+import { getQuizListing } from './quiz/all'
 
 const app = express()
 
@@ -43,7 +13,7 @@ app.use(queryParams.toCamelCase)
 
 // return all the quizzes
 app.get('/', (req, res) => {
-  res.json(quizzes)
+  res.json(getQuizListing)
 })
 
 // GET /start?quiz-identifier=3993&game-identifier=4994
