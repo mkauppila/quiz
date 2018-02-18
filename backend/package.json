@@ -9,8 +9,14 @@
     "test": "jest"
   },
   "jest": {
-    "moduleFileExtensions": ["ts", "tsx", "js"],
-    "testMatch": ["**/*.spec.(ts|tsx|js)"],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "testMatch": [
+      "**/*.spec.(ts|tsx|js)"
+    ],
     "transform": {
       ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
     }
